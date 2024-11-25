@@ -16,10 +16,51 @@ import {
   faUserSecret,
   faCodeCompare,
   faStar,
+  faUser,
+  faMugHot,
+  faHeadset,
+  faBasketShopping,
+  faBars,
+  faMagnifyingGlass,
+  faPlaneUp,
+  faWallet,
+  faGift,
+  faLink,
 } from '@fortawesome/free-solid-svg-icons'
 
+import { faEye, faHeart } from '@fortawesome/free-regular-svg-icons'
+import {
+  faFacebookF,
+  faInstagram,
+  faYoutube,
+  faTwitter,
+  faPinterestP,
+} from '@fortawesome/free-brands-svg-icons'
+import './index.css'
+
 /* add icons to the library */
-library.add(faUserSecret, faCodeCompare, faStar)
+library.add(
+  faUserSecret,
+  faCodeCompare,
+  faStar,
+  faUser,
+  faMugHot,
+  faHeadset,
+  faBasketShopping,
+  faBars,
+  faMagnifyingGlass,
+  faPlaneUp,
+  faWallet,
+  faGift,
+  faEye,
+  faHeart,
+  faLink,
+  faFacebookF,
+  faInstagram,
+  faYoutube,
+  faTwitter,
+  faPinterestP,
+)
 
 const app = createApp(App)
 app.component('font-i', FontAwesomeIcon)

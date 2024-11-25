@@ -26,22 +26,15 @@ export default {
 </script>
 
 <template>
-  <NavbarComponent />
-
-  <BannerSection />
   <main class="main-content">
-    <CategorySection />
-    <EspecialSection />
-    <ProductSection />
+    <NavbarComponent />
+    <BannerSection />
     <WidgetsSection />
+    <CategorySection />
+    <ProductSection />
     <GallerySection />
+    <EspecialSection />
     <BlogSection />
+    <FooterComponent />
   </main>
-  <FooterComponent />
 </template>
-
-<style lang="css" scoped>
-.main-content {
-  background-color: var(--background-color);
-}
-</style>

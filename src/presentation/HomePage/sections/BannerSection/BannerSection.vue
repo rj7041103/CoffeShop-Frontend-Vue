@@ -13,18 +13,3 @@ export default {
     </div>
   </section>
 </template>
-
-<style lang="css" scoped>
-.banner {
-  background-image: linear-gradient(100deg, #000000, #00000020),
-    url('../../../assets/img/banner.jpg');
-  height: 60rem;
-  background-size: cover;
-  background-position: center;
-}
-.content-banner {
-  max-width: 50rem;
-  margin: 0 auto;
-  padding: 25rem 0;
-}
-</style>
