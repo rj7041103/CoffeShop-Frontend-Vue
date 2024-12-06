@@ -14,6 +14,7 @@ export default {
     const handleSectionClick = () => {
       return (isProductSectionActive.value = !isProductSectionActive.value)
     }
+
     return {
       isProductSectionActive,
       handleSectionClick,
@@ -211,10 +212,10 @@ export default {
         </div>
         <!-- Product Section  -->
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 pl-28 pr-28"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pl-28 pr-28"
           v-if="isProductSectionActive"
         >
-          <div class="col-span-6">
+          <div class="col-span-full">
             <div class="flex justify-end items-center mb-4 pr-14 mt-[20px]">
               <button
                 data-modal-target="crud-modal"
@@ -223,18 +224,27 @@ export default {
               >
                 Add Product
               </button>
-              <FormProduct />
             </div>
           </div>
 
+          <FormProduct />
           <!-- Aquí puedes agregar múltiples CardComponent por lo que se puede iterar -->
-          <div class="col-span-1 mb-6">
+          <div class="col-span-1">
             <CardComponent />
           </div>
-          <div class="col-span-1 mb-6">
+          <div class="col-span-1">
             <CardComponent />
           </div>
-          <div class="col-span-1 mb-6">
+          <div class="col-span-1">
+            <CardComponent />
+          </div>
+          <div class="col-span-1">
+            <CardComponent />
+          </div>
+          <div class="col-span-1">
+            <CardComponent />
+          </div>
+          <div class="col-span-1">
             <CardComponent />
           </div>
         </div>
