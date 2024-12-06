@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import PaypalButton from './components/PaypalButton.vue';
+import PaypalButton from './components/PaypalButton.vue'
 import { ref, computed } from 'vue'
 
 interface CartItem {
@@ -29,22 +29,20 @@ const billingInfo = ref<BillingInfo>({
   card: '',
 })
 
-const total = computed(() => {
+const subtotal = computed(() => {
   return cartItems.value.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
   )
 })
 
-const increaseQuantity = (item: CartItem) => {
-  item.quantity++
-}
+const tax = computed(() => {
+  return subtotal.value * 0.08
+})
 
-const decreaseQuantity = (item: CartItem) => {
-  if (item.quantity > 1) {
-    item.quantity--
-  }
-}
+const total = computed(() => {
+  return subtotal.value + 30 + tax.value
+})
 
 const removeItem = (item: CartItem) => {
   const index = cartItems.value.findIndex(i => i.id === item.id)
@@ -52,19 +50,12 @@ const removeItem = (item: CartItem) => {
     cartItems.value.splice(index, 1)
   }
 }
-
-const submitOrder = () => {
-  console.log('Order submitted', {
-    billingInfo: billingInfo.value,
-    items: cartItems.value,
-    total: total.value,
-  })
-  // Here you would typically send this data to your backend
-}
 </script>
 
 <template>
-  <div class="min-h-screen w-screen text-black bg-gray-100 flex flex-col md:flex-row text-base">
+  <div
+    class="min-h-screen w-screen text-black bg-gray-100 flex flex-col md:flex-row text-base"
+  >
     <!-- Left side: Checkout -->
     <div class="w-full md:w-1/2 p-4 md:p-8 md:px-32 md:my-auto">
       <h1 class="text-2xl md:text-3xl font-bold mb-4 md:mb-8">Checkout</h1>
@@ -74,8 +65,8 @@ const submitOrder = () => {
         <h2 class="text-lg md:text-xl font-semibold mb-2 md:mb-4">
           Payment Methods
         </h2>
-        <div class="flex space-x-2 md:space-x-4">
-          <PaypalButton />
+        <div>
+          <PaypalButton :total-amount="total" />
         </div>
       </div>
 
@@ -86,9 +77,9 @@ const submitOrder = () => {
       <h2 class="text-lg md:text-xl font-semibold mb-2 md:mb-4">
         Billing Information
       </h2>
-      <form @submit.prevent="submitOrder" class="space-y-2 md:space-y-4">
+      <form @submit.prevent="" class="space-y-2 md:space-y-4">
         <div>
-          <label for="name" class="block text-sm font-medium text-gray-700"
+          <label for="name" class="block text-base font-medium text-gray-700"
             >Full Name</label
           >
           <input
@@ -96,11 +87,11 @@ const submitOrder = () => {
             id="name"
             v-model="billingInfo.name"
             required
-            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-sm md:text-base"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-base md:text-base"
           />
         </div>
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700"
+          <label for="email" class="block text-base font-medium text-gray-700"
             >Email</label
           >
           <input
@@ -108,11 +99,11 @@ const submitOrder = () => {
             id="email"
             v-model="billingInfo.email"
             required
-            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-sm md:text-base"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-base md:text-base"
           />
         </div>
         <div>
-          <label for="address" class="block text-sm font-medium text-gray-700"
+          <label for="address" class="block text-base font-medium text-gray-700"
             >Address</label
           >
           <input
@@ -120,11 +111,11 @@ const submitOrder = () => {
             id="address"
             v-model="billingInfo.address"
             required
-            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-sm md:text-base"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-base md:text-base"
           />
         </div>
         <div>
-          <label for="card" class="block text-sm font-medium text-gray-700"
+          <label for="card" class="block text-base font-medium text-gray-700"
             >Card Number</label
           >
           <input
@@ -132,12 +123,12 @@ const submitOrder = () => {
             id="card"
             v-model="billingInfo.card"
             required
-            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-sm md:text-base"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-base md:text-base"
           />
         </div>
         <button
           type="submit"
-          class="w-full bg-green-500 text-white px-4 py-2 rounded text-sm md:text-base"
+          class="w-full bg-green-500 text-white px-4 py-2 rounded text-base md:text-base"
         >
           Pay Now
         </button>
@@ -145,49 +136,72 @@ const submitOrder = () => {
     </div>
 
     <!-- Right side: Product List (hidden on small screens) -->
-    <div class="w-full md:w-1/2 bg-coffee-brown p-4 md:p-8 mt-4 md:mt-0">
-      <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-white">
-        Your Order
-      </h2>
+    <div
+      class="w-full md:w-1/2 bg-coffee-brown p-4 md:p-24 mt-4 md:mt-0 text-white text-lg"
+    >
+      <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">Your Order</h2>
       <div class="space-y-2 md:space-y-4">
-        <div
-          v-for="item in cartItems"
-          :key="item.id"
-          class="bg-white rounded-lg p-2 md:p-4 flex justify-between items-center"
-        >
-          <div>
-            <h3 class="font-semibold text-sm md:text-base">{{ item.name }}</h3>
-            <p class="text-gray-600 text-xs md:text-sm">
-              ${{ item.price.toFixed(2) }}
-            </p>
+        <div v-for="item in cartItems" :key="item.id">
+          <div
+            class="hover:bg-zinc-100/10 rounded-lg p-2 md:p-4 flex justify-between items-center gap-4"
+          >
+            <img
+              :src="`https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/1200px-A_small_cup_of_coffee.JPG`"
+              :alt="item.name"
+              class="size-24 md:size-32 object-cover rounded-lg"
+            />
+            <div class="w-full flex flex-col gap-12">
+              <h3 class="font-semibold text-base md:text-xl">
+                {{ item.name }}
+              </h3>
+              <p class="text-base md:text-2xl font-bold">
+                ${{ item.price.toFixed(2) }}
+              </p>
+            </div>
+
+            <div class="flex gap-4 justify-between space-x-1 md:space-x-2">
+              <select v-model="item.quantity" class="text-base md:text-xl text-black">
+                <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
+              </select>
+
+              <button
+                @click="removeItem(item)"
+                class="text-red-500 hover:text-red-700 text-base md:text-base"
+              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+              </button>
+            </div>
           </div>
-          <div class="flex items-center space-x-1 md:space-x-2">
-            <button
-              @click="decreaseQuantity(item)"
-              class="text-gray-500 hover:text-gray-700 text-sm md:text-base"
-            >
-              -
-            </button>
-            <span class="text-sm md:text-base">{{ item.quantity }}</span>
-            <button
-              @click="increaseQuantity(item)"
-              class="text-gray-500 hover:text-gray-700 text-sm md:text-base"
-            >
-              +
-            </button>
-            <button
-              @click="removeItem(item)"
-              class="text-red-500 hover:text-red-700 text-xs md:text-sm"
-            >
-              Remove
-            </button>
-          </div>
+
+          <div class="border-b border-white/20 my-4"></div>
         </div>
       </div>
-      <div class="mt-4 md:mt-6 text-white">
-        <p class="text-lg md:text-xl font-bold">
-          Total: ${{ total.toFixed(2) }}
-        </p>
+      <div class="mt-4 md:mt-6 text-white flex justify-between">
+        <div class="flex flex-col gap-5 font-medium">
+          <p class="text-lg md:text-xl">
+            Subtotal
+          </p>
+          <p class="text-lg md:text-xl">
+            Shipping
+          </p>
+          <p class="text-lg md:text-xl">
+            Tax
+          </p>
+        </div>
+        <div class="flex flex-col gap-5 font-bold text-right">
+          <p class="font-bold">{{ subtotal.toFixed(2) }} $</p>
+          <p class="font-bold">30 $</p>
+          <p class="font-bold">{{ tax.toFixed(2) }} $</p>
+        </div>
+
+        
+        
+      </div>
+      <div class="border-b border-white/20 my-4"></div>
+
+      <div class="flex justify-between text-white mt-2">
+        <p class="text-lg md:text-2xl font-bold">Total</p>
+        <p class="text-lg md:text-2xl font-bold">{{ total.toFixed(2) }} $</p>
       </div>
     </div>
 
@@ -205,7 +219,7 @@ const submitOrder = () => {
         </div>
       </div>
       <div class="mt-4 text-white">
-        <p class="text-lg font-bold">Total: ${{ total.toFixed(2) }}</p>
+        <p class="text-lg font-bold">Total: ${{ subtotal.toFixed(2) }}</p>
       </div>
     </div>
   </div>

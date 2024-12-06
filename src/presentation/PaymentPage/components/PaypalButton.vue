@@ -5,6 +5,8 @@ import { onBeforeMount } from 'vue'
 const CLIENT_ID =
   'AQ_mFvQfIIDUvpYRpWTv3wXsa8IzK9gRfOcgpoNcKKcz2IAv6fOr1DvC66dITudb6u2oE_4B3QuThjP7'
 
+const { totalAmount } = defineProps({ totalAmount: Number })
+
 onBeforeMount(async function () {
   let paypal
 
@@ -21,9 +23,10 @@ onBeforeMount(async function () {
           .Buttons({
             style: {
               layout: 'vertical',
-              color: 'gold',
+              color: 'blue',
               shape: 'sharp',
               label: 'paypal',
+              height: 35,
             },
             createOrder: createOrder,
             onApprove: onApprove,
@@ -42,8 +45,7 @@ onBeforeMount(async function () {
         {
           description: 'Simple coffee order',
           amount: {
-            // value: cartTotal,
-            value: 1000,
+            value: totalAmount,
           },
         },
       ],
