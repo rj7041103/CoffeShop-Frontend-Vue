@@ -18,9 +18,13 @@
     "@fortawesome/free-regular-svg-icons": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/vue-fontawesome": "^3.0.8",
+    "axios": "^1.7.9",
+    "flowbite": "^2.5.2",
     "pinia": "^2.2.4",
+    "vee-validate": "^4.14.7",
     "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
@@ -35,6 +39,7 @@
     "eslint-plugin-vue": "^9.29.0",
     "npm-run-all2": "^7.0.1",
     "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.0",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.15",
     "typescript": "~5.6.0",

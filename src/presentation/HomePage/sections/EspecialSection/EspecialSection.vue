@@ -1,9 +1,9 @@
 <script lang="ts">
-import ProductComponent from '@/features/Products/ProductComponent.vue'
+//import ProductComponent from '@/features/Products/ProductComponent.vue'
 
 export default {
   name: 'EspecialSection',
-  components: { ProductComponent },
+  //components: { ProductComponent },
 }
 </script>
 <template>
@@ -11,10 +11,10 @@ export default {
     <h1 class="heading-1">Especiales</h1>
 
     <div class="container-products">
+      <!-- <ProductComponent />
       <ProductComponent />
       <ProductComponent />
-      <ProductComponent />
-      <ProductComponent />
+      <ProductComponent /> -->
     </div>
   </section>
 </template>

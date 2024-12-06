@@ -1,6 +1,7 @@
 <script setup lang="ts">
 //import { RouterView } from 'vue-router'
-import HomeIndex from './presentation/HomePage/HomeIndex.vue'
+//import HomeIndex from './presentation/HomePage/HomeIndex.vue'
+import MainDashBoard from './presentation/DashboardPage/MainDashBoard.vue'
 </script>
 
 <template>
@@ -15,7 +16,8 @@ import HomeIndex from './presentation/HomePage/HomeIndex.vue'
     </head>
 
     <body>
-      <HomeIndex />
+      <!-- <HomeIndex /> -->
+      <MainDashBoard />
     </body>
   </html>
 </template>

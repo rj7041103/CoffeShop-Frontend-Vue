@@ -1,13 +1,30 @@
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
+export default defineComponent({
   name: 'ProductComponent',
-}
+  props: {
+    imagen: {
+      type: String as PropType<string>,
+      required: true,
+    },
+    nombre: {
+      type: String as PropType<string>,
+      required: true,
+    },
+    precio: {
+      type: Number as PropType<number>,
+      required: true,
+    },
+  },
+})
 </script>
 
 <template>
   <div class="card-product">
     <div class="container-img">
-      <img src="../../assets/img/cafe-australiano.jpg" alt="Cafe Australiano" />
+      <img :src="imagen" alt="Imagen del producto" />
       <div class="button-group">
         <span>
           <font-i icon="fa-regular fa-eye"></font-i>
@@ -28,11 +45,11 @@ export default {
         <font-i icon="fa-solid fa-star"></font-i>
         <font-i icon="fa-solid fa-star"></font-i>
       </div>
-      <h3>Cafe Australiano</h3>
+      <h3>{{ nombre }}</h3>
       <span class="add-cart">
         <font-i icon="fa-solid fa-basket-shopping"></font-i>
       </span>
-      <p class="price">$3.20</p>
+      <p class="price">${{ precio.toFixed(2) }}</p>
     </div>
   </div>
 </template>

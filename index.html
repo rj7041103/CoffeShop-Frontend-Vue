@@ -5,12 +5,45 @@
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vite App</title>
+  <title>Coffee App</title>
+  <style>
+    /* Animaciones personalizadas */
+    .slide-in {
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 
-<body>
+<body class="m-0 p-0 flex justify-start">
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
+
 </body>
 
 </html>

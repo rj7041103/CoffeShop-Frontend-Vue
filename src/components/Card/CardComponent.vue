@@ -26,7 +26,6 @@ export default {
         maxime amet dolor voluptas facilis corporis, consequatur eius est sunt
         suscipit?
       </p>
-      <div class="btn-read-more">Leer más</div>
     </div>
   </div>
 </template>

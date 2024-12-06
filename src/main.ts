@@ -26,6 +26,7 @@ import {
   faWallet,
   faGift,
   faLink,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { faEye, faHeart } from '@fortawesome/free-regular-svg-icons'
@@ -60,6 +61,7 @@ library.add(
   faYoutube,
   faTwitter,
   faPinterestP,
+  faTrash,
 )
 
 const app = createApp(App)
