@@ -18,8 +18,8 @@ const router = createRouter({
       component: HomeIndex,
     },
     {
-      path: '/payment',
-      name: 'payment',
+      path: '/checkout',
+      name: 'Checkout',
       component: PaymentView,
     }
   ],

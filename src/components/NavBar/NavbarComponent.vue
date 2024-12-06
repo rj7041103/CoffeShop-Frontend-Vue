@@ -15,11 +15,13 @@ export default {
 
         <div class="container-user">
           <font-i icon="fa-solid fa-user"></font-i>
-          <font-i icon="fa-solid fa-basket-shopping"></font-i>
-          <div class="content-shopping-cart">
-            <span class="text">Carrito</span>
-            <span class="number">(0)</span>
-          </div>
+          <router-link to="/checkout" class="flex mr-8">
+            <font-i icon="fa-solid fa-basket-shopping"></font-i>
+            <div class="content-shopping-cart">
+              <span class="text">Carrito</span>
+              <span class="number">(0)</span>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
