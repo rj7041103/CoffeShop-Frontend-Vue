@@ -1,13 +1,13 @@
 <script setup lang="ts">
-//import { RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 //import HomeIndex from './presentation/HomePage/HomeIndex.vue'
 import MainDashBoard from './presentation/DashboardPage/MainDashBoard.vue'
 </script>
 
 <template>
-  <!-- <RouterView /> -->
+  <RouterView />
 
-  <html lang="en">
+  <!-- <html lang="en">
     <head>
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,10 +16,10 @@ import MainDashBoard from './presentation/DashboardPage/MainDashBoard.vue'
     </head>
 
     <body>
-      <!-- <HomeIndex /> -->
+      <HomeIndex />
       <MainDashBoard />
     </body>
-  </html>
+  </html> -->
 </template>
 
 <style lang="css">

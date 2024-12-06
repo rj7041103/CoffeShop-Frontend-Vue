@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 /* import App from '@/App.vue' */
 import HomeIndex from '@/presentation/HomePage/HomeIndex.vue'
 import MainDashBoard from '@/presentation/DashboardPage/MainDashBoard.vue'
+import PaymentView from '@/presentation/PaymentPage/PaymentView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -16,6 +17,11 @@ const router = createRouter({
       name: 'home',
       component: HomeIndex,
     },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: PaymentView,
+    }
   ],
 })
 
