@@ -5,7 +5,7 @@ import { onBeforeMount } from 'vue'
 const CLIENT_ID =
   'AQ_mFvQfIIDUvpYRpWTv3wXsa8IzK9gRfOcgpoNcKKcz2IAv6fOr1DvC66dITudb6u2oE_4B3QuThjP7'
 
-const { totalAmount } = defineProps({ totalAmount: Number })
+const { totalAmount } = defineProps({ totalAmount: String })
 
 onBeforeMount(async function () {
   let paypal
@@ -43,7 +43,7 @@ onBeforeMount(async function () {
     return actions.order.create({
       purchase_units: [
         {
-          description: 'Simple coffee order',
+          description: 'Coffe Order',
           amount: {
             value: totalAmount,
           },

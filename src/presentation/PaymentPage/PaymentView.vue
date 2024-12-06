@@ -2,11 +2,19 @@
 import PaypalButton from './components/PaypalButton.vue'
 import { ref, computed } from 'vue'
 
+import { useInventory } from '@/stores/InventoryStore'; 
+
+const cartItems = useInventory().productsInventory;
+
 interface CartItem {
   id: number
   name: string
-  price: number
+  description: string
+  category: string
+  presentation: string
   quantity: number
+  cost: number
+  image: string
 }
 
 interface BillingInfo {
@@ -16,12 +24,6 @@ interface BillingInfo {
   card: string
 }
 
-const cartItems = ref<CartItem[]>([
-  { id: 1, name: 'Espresso', price: 2.5, quantity: 1 },
-  { id: 2, name: 'Cappuccino', price: 3.5, quantity: 2 },
-  { id: 3, name: 'Latte', price: 4.0, quantity: 1 },
-])
-
 const billingInfo = ref<BillingInfo>({
   name: '',
   email: '',
@@ -30,8 +32,8 @@ const billingInfo = ref<BillingInfo>({
 })
 
 const subtotal = computed(() => {
-  return cartItems.value.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+  return cartItems.reduce(
+    (sum, item) => sum + item.cost * item.quantity,
     0,
   )
 })
@@ -45,9 +47,9 @@ const total = computed(() => {
 })
 
 const removeItem = (item: CartItem) => {
-  const index = cartItems.value.findIndex(i => i.id === item.id)
+  const index = cartItems.findIndex(i => i.id === item.id)
   if (index !== -1) {
-    cartItems.value.splice(index, 1)
+    cartItems.splice(index, 1)
   }
 }
 </script>
@@ -66,7 +68,7 @@ const removeItem = (item: CartItem) => {
           Payment Methods
         </h2>
         <div>
-          <PaypalButton :total-amount="total" />
+          <PaypalButton :total-amount="total.toFixed(2)" />
         </div>
       </div>
 
@@ -155,7 +157,7 @@ const removeItem = (item: CartItem) => {
                 {{ item.name }}
               </h3>
               <p class="text-base md:text-2xl font-bold">
-                ${{ item.price.toFixed(2) }}
+                ${{ (item.cost * item.quantity).toFixed(2) }}
               </p>
             </div>
 
@@ -189,13 +191,10 @@ const removeItem = (item: CartItem) => {
           </p>
         </div>
         <div class="flex flex-col gap-5 font-bold text-right">
-          <p class="font-bold">{{ subtotal.toFixed(2) }} $</p>
+          <p class="font-bold">{{ subtotal.toFixed(2)  }} $</p>
           <p class="font-bold">30 $</p>
           <p class="font-bold">{{ tax.toFixed(2) }} $</p>
         </div>
-
-        
-        
       </div>
       <div class="border-b border-white/20 my-4"></div>
 
@@ -211,11 +210,10 @@ const removeItem = (item: CartItem) => {
       <div class="space-y-2">
         <div
           v-for="item in cartItems"
-          :key="item.id"
           class="flex justify-between text-white"
         >
           <span>{{ item.name }} (x{{ item.quantity }})</span>
-          <span>${{ (item.price * item.quantity).toFixed(2) }}</span>
+          <span>${{ (item.cost * item.quantity).toFixed(2) }}</span>
         </div>
       </div>
       <div class="mt-4 text-white">
